@@ -1,10 +1,11 @@
 package com.allamou.wedoogiftbackend.model;
 
-import jakarta.persistence.*;
+import javax.persistence.*;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@Entity
 public class Company {
 
     @Id
@@ -12,7 +13,7 @@ public class Company {
     private int companyId;
 
     private String name;
-    private float balance;
+    private double balance;
 
     @OneToMany(mappedBy = "company", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<User> users = new ArrayList<>();
@@ -33,11 +34,11 @@ public class Company {
         this.name = name;
     }
 
-    public float getBalance() {
+    public double getBalance() {
         return balance;
     }
 
-    public void setBalance(float balance) {
+    public void setBalance(double balance) {
         this.balance = balance;
     }
 

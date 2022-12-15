@@ -1,9 +1,10 @@
 package com.allamou.wedoogiftbackend.model;
 
-import jakarta.persistence.*;
+import javax.persistence.*;
 
 import java.time.LocalDate;
 
+@Entity
 public class Deposit {
 
     @Id
@@ -11,14 +12,16 @@ public class Deposit {
     private int depositId;
 
     @Column(name = "deposit_amount")
-    private float depositAmount;
+    private double depositAmount;
 
-    @Column(name = "expiration_date")
+    @Column(name = "expiration_date", columnDefinition = "DATE")
     private LocalDate expirationDate;
 
+    @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
 
+    @Enumerated(EnumType.STRING)
     private DEPOSIT_TYPE type;
 
     public int getDepositId() {
@@ -29,11 +32,11 @@ public class Deposit {
         this.depositId = depositId;
     }
 
-    public float getDepositAmount() {
+    public double getDepositAmount() {
         return depositAmount;
     }
 
-    public void setDepositAmount(float depositAmount) {
+    public void setDepositAmount(double depositAmount) {
         this.depositAmount = depositAmount;
     }
 

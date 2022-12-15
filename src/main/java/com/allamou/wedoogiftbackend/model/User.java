@@ -1,21 +1,26 @@
 package com.allamou.wedoogiftbackend.model;
+import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
-import jakarta.persistence.*;
-
+@Entity
 public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int idUser;
+
     @Column(name = "full_name")
     private String fullName;
 
     @Column(name = "gift_balance")
-    private float giftBalance;
-    @Column(name = "meal_balance")
-    private float mealBalance;
+    private double giftBalance;
 
-    private Deposit deposit;
+    @Column(name = "meal_balance")
+    private double mealBalance;
+
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
+    private List<Deposit> userDeposits =  new ArrayList<>();
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "company_id")
@@ -37,19 +42,19 @@ public class User {
         this.fullName = fullName;
     }
 
-    public float getGiftBalance() {
+    public double getGiftBalance() {
         return giftBalance;
     }
 
-    public void setGiftBalance(float giftBalance) {
+    public void setGiftBalance(double giftBalance) {
         this.giftBalance = giftBalance;
     }
 
-    public float getMealBalance() {
+    public double getMealBalance() {
         return mealBalance;
     }
 
-    public void setMealBalance(float mealBalance) {
+    public void setMealBalance(double mealBalance) {
         this.mealBalance = mealBalance;
     }
 
@@ -59,5 +64,17 @@ public class User {
 
     public void setCompany(Company company) {
         this.company = company;
+    }
+
+    public double getTotalBalance() {
+        return getGiftBalance() + getMealBalance();
+    }
+
+    public List<Deposit> getUserDeposits() {
+        return userDeposits;
+    }
+
+    public void setUserDeposits(List<Deposit> userDeposits) {
+        this.userDeposits = userDeposits;
     }
 }
