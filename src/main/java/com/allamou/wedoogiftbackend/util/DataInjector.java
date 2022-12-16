@@ -5,7 +5,6 @@ import com.allamou.wedoogiftbackend.model.User;
 import com.allamou.wedoogiftbackend.repository.CompanyRepository;
 import com.allamou.wedoogiftbackend.repository.DepositRepository;
 import com.allamou.wedoogiftbackend.repository.UserRepository;
-import com.allamou.wedoogiftbackend.service.CompanyService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,24 +14,22 @@ import org.springframework.stereotype.Component;
 @Component
 public class DataInjector implements CommandLineRunner {
 
-    private static Logger LOGGER = LoggerFactory.getLogger(DataInjector.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(DataInjector.class);
 
     private final UserRepository userRepository;
 
     private final CompanyRepository companyRepository;
 
-    private final DepositRepository depositRepository;
 
     @Autowired
-    public DataInjector(UserRepository userRepository, CompanyRepository companyRepository, DepositRepository depositRepository) {
+    public DataInjector(UserRepository userRepository, CompanyRepository companyRepository) {
         this.userRepository = userRepository;
         this.companyRepository = companyRepository;
-        this.depositRepository = depositRepository;
     }
 
 
     @Override
-    public void run(String... args) throws Exception {
+    public void run(String... args) {
         LOGGER.info("Chargement de données ...");
 
         //Pour simplifier, on part du principe qu'il y a au moins une entreprise lié à au moins un utilisateur avant de lancer l'application
@@ -59,7 +56,7 @@ public class DataInjector implements CommandLineRunner {
             user4.setFullName("Othmane Allamou");
 
             Company company = new Company();
-            company.setName("company A");
+            company.setName("WEDOOGIFT");
             company.setBalance(1000.23);
             company.addUser(user1, true);
             company.addUser(user2, true);
