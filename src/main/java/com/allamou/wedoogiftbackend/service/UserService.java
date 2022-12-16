@@ -1,6 +1,7 @@
 package com.allamou.wedoogiftbackend.service;
 
 import com.allamou.wedoogiftbackend.dto.UserBalanceResponse;
+import com.allamou.wedoogiftbackend.dto.UserDto;
 import com.allamou.wedoogiftbackend.exception.UserNotFoundException;
 import com.allamou.wedoogiftbackend.model.User;
 import com.allamou.wedoogiftbackend.repository.UserRepository;
@@ -9,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class UserService {
@@ -20,8 +22,10 @@ public class UserService {
         this.userRepository = userRepository;
     }
 
-    public List<User> getAllUsers() {
-        return userRepository.findAll();
+    public List<UserDto> getAllUsers() {
+        return userRepository.findAll().stream()
+                .map(UserMapper::mapUserToDto)
+                .collect(Collectors.toList());
     }
 
     public UserBalanceResponse getTotalBalance(int userId) {

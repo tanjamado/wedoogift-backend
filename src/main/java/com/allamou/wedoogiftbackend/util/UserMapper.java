@@ -1,6 +1,7 @@
 package com.allamou.wedoogiftbackend.util;
 
 import com.allamou.wedoogiftbackend.dto.UserBalanceResponse;
+import com.allamou.wedoogiftbackend.dto.UserDto;
 import com.allamou.wedoogiftbackend.model.User;
 
 public class UserMapper {
@@ -14,5 +15,17 @@ public class UserMapper {
         userBalanceResponse.setTotalBalance(user.getTotalBalance());
 
         return userBalanceResponse;
+    }
+
+    public static UserDto mapUserToDto(User user) {
+        UserDto userDto = new UserDto();
+
+        userDto.setUserId(user.getIdUser());
+        userDto.setFullName(user.getFullName());
+        userDto.setGiftBalance(user.getGiftBalance());
+        userDto.setMealBalance(user.getMealBalance());
+        userDto.setTotalBalance(user.getTotalBalance());
+
+        return userDto;
     }
 }

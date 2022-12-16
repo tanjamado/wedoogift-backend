@@ -1,6 +1,7 @@
 package com.allamou.wedoogiftbackend.controller;
 
 import com.allamou.wedoogiftbackend.dto.UserBalanceResponse;
+import com.allamou.wedoogiftbackend.dto.UserDto;
 import com.allamou.wedoogiftbackend.model.DEPOSIT_TYPE;
 import com.allamou.wedoogiftbackend.model.User;
 import com.allamou.wedoogiftbackend.repository.UserRepository;
@@ -31,7 +32,7 @@ public class UserController {
     }
 
     @GetMapping
-    public ResponseEntity<List<User>> getAllUsers() {
+    public ResponseEntity<List<UserDto>> getAllUsers() {
         return ResponseEntity.status(HttpStatus.OK).body(userService.getAllUsers());
     }
 
