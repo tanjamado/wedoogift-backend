@@ -1,6 +1,5 @@
 package com.allamou.wedoogiftbackend.repository;
 
-import com.allamou.wedoogiftbackend.model.Company;
 import com.allamou.wedoogiftbackend.model.User;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,13 +30,20 @@ public class UserRepositoryTest {
     }
 
     @Test
-    public void findsUserByCompany() {
+    public void findsByFullName() {
+        User user = new User();
+        user.setFullName("OthmaneTest AllamouTest");
+        user.setMealBalance(0);
+        user.setGiftBalance(0);
 
-        Company company = new Company();
-        company.setName("wedoogift test");
-        company.setBalance(9999);
+        userRepository.save(user);
 
+        assertThat(userRepository.findByFullName("OthmaneTest AllamouTest").get())
+                .usingRecursiveComparison().isEqualTo(user);
     }
+
+
+    //etc ..
 
 
 }

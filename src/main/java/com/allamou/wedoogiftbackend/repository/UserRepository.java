@@ -12,7 +12,7 @@ import java.util.Optional;
 
 @Repository
 public interface UserRepository extends JpaRepository<User, Integer> {
-    Optional<User> findByCompany(Company company);
+    Optional<User> findByFullName(String funnName);
     List<User> findAllByCompany(Company company);
 
     @Query("update User u set u.giftBalance = ?2 where u.idUser = ?1")
