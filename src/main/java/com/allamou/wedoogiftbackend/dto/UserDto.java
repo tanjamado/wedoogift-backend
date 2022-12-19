@@ -48,4 +48,10 @@ public class UserDto {
     public void setTotalBalance(double totalBalance) {
         this.totalBalance = totalBalance;
     }
+
+    @Override
+    public String toString() {
+        return "{fullName : " + getFullName() + " mealBalance : " + getMealBalance() + " giftBalance : " + getGiftBalance()
+                + " totalBalance : " + getTotalBalance() + "}";
+    }
 }
