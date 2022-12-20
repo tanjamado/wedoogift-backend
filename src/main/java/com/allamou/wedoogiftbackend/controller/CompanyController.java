@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/api/company")
+@RequestMapping("/api/companies")
 public class CompanyController {
 
     private final CompanyService companyService;
@@ -23,10 +23,10 @@ public class CompanyController {
     }
 
     @PostMapping("/deposit")
-    public ResponseEntity<Void> makeDepositToUser(@RequestParam int companyId,
-                                                  @RequestParam int userId,
+    public ResponseEntity<Void> makeDepositToUser(@RequestParam("company_id") int companyId,
+                                                  @RequestParam("user_id") int userId,
                                                   @RequestParam double amount,
-                                                  @RequestParam String depositType) {
+                                                  @RequestParam("type") String depositType) {
         companyService.makeDeposit(companyId, userId, amount, DEPOSIT_TYPE.valueOf(depositType));
         return new ResponseEntity<>(HttpStatus.OK);
     }

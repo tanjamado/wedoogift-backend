@@ -2,9 +2,6 @@ package com.allamou.wedoogiftbackend.controller;
 
 import com.allamou.wedoogiftbackend.dto.UserBalanceResponse;
 import com.allamou.wedoogiftbackend.dto.UserDto;
-import com.allamou.wedoogiftbackend.model.DEPOSIT_TYPE;
-import com.allamou.wedoogiftbackend.model.User;
-import com.allamou.wedoogiftbackend.repository.UserRepository;
 import com.allamou.wedoogiftbackend.service.CompanyService;
 import com.allamou.wedoogiftbackend.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,10 +34,7 @@ public class UserController {
     }
 
     @GetMapping("/balance")
-    public ResponseEntity<UserBalanceResponse> getTotalBalance(@RequestParam int userId) {
+    public ResponseEntity<UserBalanceResponse> getTotalBalance(@RequestParam("user_id") int userId) {
         return ResponseEntity.status(HttpStatus.OK).body(userService.getTotalBalance(userId));
     }
-
-
-
 }
